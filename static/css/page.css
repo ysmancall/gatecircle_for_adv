@@ -1,0 +1,252 @@
+.content_box input[type=text]{background:#f5f5f5;border:1px solid #e3e3e3;padding:4px 6px;color:#666;font-size:0.95em;margin:0 4px 0 2px;}
+.content_box input[type=text]:focus {border:1px solid #aad8ea;background:#d8f3fe;}
+
+/** 판매정보 조회 검색 영역 **/
+.lineNum_sel {padding:6px 0;}
+.lineNum_sel select {width:100%;}
+
+.box2 input[type=checkbox] {vertical-align:middle;}
+.box2 p.t_title {padding:7px 0;font-weight:bold;color:#333;padding-top:21px;}
+.box2 p.t_title:first-child {padding-top:12px !important;}
+
+.box2 p.t_list {border:1px solid #ddd;background:#f5f5f5;padding:7px;font-size:0.9em;letter-spacing:-1px;}
+.box2 p.t_list span {padding-right:20px;word-break:break-all;display:inline-block;line-height:27px;}
+.box2 p.t_list span:last-child {padding-right:0 !important;}
+.box2 p label{margin-left:6px;}
+
+/** 초기화면 **/
+.contact_time {height:32px;line-height:32px;float:right;margin-bottom:0px;position:relative;bottom:-15px;}
+.contact_time span.recent_title {margin-left:4px;font-weight:bold;color:#000;}
+
+/** 판매정보조회 - 검색결과 - **/
+
+.infoSale_title{padding:10px 0 12px 0;position:relative;border-top:2px solid #3793d9;clear:both;border-bottom:1px solid #ccc;margin-bottom:10px;background:url(../images/common/bg_blueB.jpg) left top repeat;}
+.infoSale_title h2 {display:inline;padding-right:20px;width:100px;color:#333;font-weight:bold;font-family:dotum;}
+.infoSale_title span.opt {padding:0 !important;margin:0 !important;}
+.infoSale_title span label {background:url(../images/common/bool_table_th.gif) left 50% no-repeat;padding-left:8px;margin-right:5px;font-weight:bold;color:#333;}
+.infoSale_title span input[type=text] {padding:3px 1px !important;margin:0 !important;text-align:center !important;}
+.infoSale_title select {margin:0 !important;}
+
+.infoSale_title span.startDate {display:inline-block;margin-left:0px !important;}
+
+/*
+.saleInfo_group1 {padding:10px 3px 3px; background:#4563b0;color:#fff;clear:both;}
+.saleInfo_group2 {padding:10px 3px 3px; background:#447aa8;color:#fff;clear:both;margin-top:18px;}
+.saleInfo_group1 .listTitle,.saleInfo_group2 .listTitle {margin-left:10px;}
+.saleInfo_group1 span,.saleInfo_group2 span  {display:inline-block;margin-bottom:10px;}
+.saleInfo_group1 .sec_title01,.saleInfo_group2 .sec_title01 {background:url(../images/common/bool_sec_title.gif) left 50% no-repeat ;font-weight:bold;width:100px;padding-left:12px;font-size:1.2em;}
+.saleInfo_group1 .set_title02,.saleInfo_group2 .set_title02  {background:url(../images/common/bool_sec_stitle.gif) left 50% no-repeat ;padding-left:10px;margin-right:25px;font-size:0.9em;letter-spacing:0.01em;}
+*/
+
+.saleInfo_group1 {padding:10px 3px 3px; background:#4563b0;color:#fff;clear:both;margin-top:14px;}
+.saleInfo_group2 {padding:10px 3px 3px; background:#447aa8;color:#fff;clear:both;margin-top:6px;}
+.saleInfo_group1 technology {background:#4563b0;}
+.saleInfo_group1 .technology .listTitle{margin-left:;color:#fff;background:#4563b0;padding-left:12px;}
+.saleInfo_group2 .technology .listTitle {margin-left:;color:#fff;background:#447aa8;padding-left:12px;}
+.saleInfo_group1 span,.saleInfo_group2 span  {display:inline-block;margin-bottom:10px;}
+.saleInfo_group1 .sec_title01,.saleInfo_group2 .sec_title01 {background:url(../images/common/bool_sec_title.gif) left 50% no-repeat ;font-weight:bold;width:100px;padding-left:12px;font-size:1.2em;}
+.saleInfo_group1 .set_title02,.saleInfo_group2 .set_title02  {background:url(../images/common/bool_sec_stitle.gif) left 50% no-repeat ;padding-left:10px;margin-right:25px;font-size:0.9em;letter-spacing:0.01em;}
+
+/** 판매승인 요청 **/
+p.able_cost {background:url(../images/oasis_sales/money-coin.png) left 50% no-repeat; padding-left:22px;float:right;margin:20px 0;}
+p.able_cost strong {color:#000;}
+.contract_option {padding:10px 10px 0;border:4px solid #ddd;margin-bottom:20px;overflow-y:auto;}
+.contract_option h2.m_contract {padding-left:18px;margin-bottom:7px;margin-top:6px;background:url(../images/oasis_sales/m_contract.png) left 50% no-repeat;font-size:14px;color:#222;font-weight:bold;}
+.contract_option h2.p_contract {padding-left:18px;margin-bottom:7px;margin-top:24px;background:url(../images/oasis_sales/p_contract.png) left 50% no-repeat;font-size:14px;color:#222;font-weight:bold;}
+
+.m_contractField {padding:6px 12px;border:1px solid #ddd;background:#f8f8f8;margin-bottom:10px;letter-spacing:-1px;}
+.m_contractField span{display:inline-block;}
+.m_contractField span.col1 {width:340px;}
+.m_contractField span.col2 {width:;}
+.m_contractField span.col3 {margin-right:12px;}
+.m_contractField span.col3 label {width:auto !important;padding-right:14px;}
+
+.m_contractField p {padding:4px 0;}
+.m_contractField label {padding-right:7px;display:inline-block;background:url(../images/common/bool_ddData.gif) left 50% no-repeat;padding-left:8px;font-weight:bold;color:#444;}
+.m_contractField span.col1 label {width:75px;}
+.m_contractField span.col2 label {width:75px;}
+
+.m_contractField input[type=text] {background:#fff;border:1px solid #e3e3e3;padding:2px 6px;color:#666;font-size:0.95em;margin:0 4px 0 2px;}
+.m_contractField input[type=text]:focus {border:1px solid #aad8ea;background:#d8f3fe;}
+.m_contractField input.receiveData {font-weight:bold;color:#222;font-size:0.89em;border:1px solid #ddd;background:transparent;}
+.m_contractField input.receiveData:focus {background:none;border:1px solid #ddd;}
+
+.p_contractField  {overflow-y:auto;}
+.p_contractField input[type=text] {background:#fff;border:1px solid #e3e3e3;padding:2px 1px;color:#666;font-size:0.95em;margin:0 4px 0 2px;}
+.p_contractField input[type=text]:focus {border:1px solid #aad8ea;background:#d8f3fe;}
+
+.contract_selOption {padding:10px 0 12px 0;border-top:2px solid #89ad11;clear:both;border-bottom:2px solid #89ad11 ;margin-bottom:10px;/*background:url(../images/common/bg_blueB.jpg) left top  repeat;*/}
+.contract_selOption span {vertical-align:middle;}
+.contract_selOption span.firstSpan{padding-left:40px;}
+.contract_selOption select{vertical-align:middle;margin-right:5px;}
+.contract_selOption input[type=radio] {vertical-align:middle;}
+
+.contract_selOption1 {
+	padding:10px 0 12px 0;
+	border-top:2px solid #3793d9;
+	clear:both;
+	border-bottom:2px solid #ccc;
+	margin-bottom:10px;
+	background: -moz-linear-gradient(top, #fff 70%, #f0f0f0 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(70%, #fff), color-stop(100%, #f0f0f0));
+	background: -webkit-linear-gradient(top, #fff 70%, #f0f0f0 100%);
+	background: -o-linear-gradient(top, #fff 70%, #f0f0f0 100%);
+	background: -ms-linear-gradient(top, #fff 70%, #f0f0f0 100%);
+	background: linear-gradient(to bottom, #fff 70%, #f0f0f0 100%);
+	filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#ffffff', EndColorStr='#f0f0f0', GradientType=0);  
+}
+.contract_selOption1 span {vertical-align:middle;}
+.contract_selOption1 span.firstSpan{padding-left:40px;}
+.contract_selOption1 select{vertical-align:middle;margin-right:5px;}
+.contract_selOption1 input[type=radio] {vertical-align:middle;}
+
+/** 판매승인 요청 **/
+
+.btnRequest_bottom {text-align:right;padding:14px 0 20px;}
+
+
+/** 도안심의처리 **/
+.deliberate_confirm {position:relative;}
+.deliberate_confirm .listTitle01 {padding:10px 16px 8px;border-top:3px solid #1c83e2;border-bottom:1px solid #1c83e2;text-align:center;font-size:1.15em;}
+.deliberate_confirm .listTitle01 span {display:inline-block;}
+.deliberate_confirm .listTitle01 span.t_01{width:auto;font-weight:bold;color:#222;background:url(../images/common/bool_ddData.gif) left 50% no-repeat;padding-left:8px;margin-right:60px;}
+
+.deliberate_confirm .listTitle01 span.leftBtn a{position:absolute;width:38px;height:18px;left:0;top:9px;cursor:pointer;background:url(../images/oasis_sales/btn_goListTitle.gif) left top no-repeat;}
+.deliberate_confirm .listTitle01 span.leftBtn a:hover {background-position:left -23px;width:43px;}
+.deliberate_confirm .listTitle01 span.rightBtn a{position:absolute;width:38px;height:18px;right:0;top:9px;cursor:pointer;background:url(../images/oasis_sales/btn_goListTitle.gif) right top no-repeat;}
+.deliberate_confirm .listTitle01 span.rightBtn a:hover {background-position:right -23px;width:43px;}
+
+.deliberate_confirm .listGroup01 {margin-top:14px;}
+.deliberate_confirm .listGroup01 ul,.deliberate_confirm .listGroup01 li {list-style:none;margin:0;padding:0;}
+/** 20121105 Mod SayidLee Start **/
+/**.deliberate_confirm .listGroup01 li {display:inline-block;float:left;height:145px;border-bottom:1px solid #ddd;margin-bottom:12px;}**/
+.deliberate_confirm .listGroup01 li {display:inline-block;float:left;height:165px;border-bottom:1px solid #ddd;margin-bottom:12px;}
+/** 20121105 Mod SayidLee End **/
+.deliberate_confirm .listGroup01 li.thumb {width:115px;text-align:center;}
+
+.deliberate_confirm .listGroup01 li.thumb span {display:inline-block;padding-bottom:16px;padding-top:8px;}
+.deliberate_confirm .listGroup01 li.thumb span.currentZoom{background:#22a4d4;color:#fff;}
+.deliberate_confirm .listGroup01 li.thumb em {position:relative;top:10px;font-style:normal;background:url(../images/common/search.gif) left 50% no-repeat;padding-left:15px;font-size:0.9em;line-height:12px;letter-spacing:-1px;font-weight:bold;}
+.deliberate_confirm .listGroup01 li.listData label{background:url(../images/common/bool_table_th.gif) left 50% no-repeat;padding-left:8px;font-weight:;color:;letter-spacing:-1px;margin-right:5px;}
+
+.deliberate_confirm .listGroup01 li.listData {padding-left:12px;}
+/** 20121105 Mod SayidLee Start **/
+/**.deliberate_confirm .listGroup01 li.listData p {padding-bottom:9px;}**/
+.deliberate_confirm .listGroup01 li.listData p {padding-bottom:8px;}
+/** 20121105 Mod SayidLee End **/
+.deliberate_confirm .listGroup01 li.listData p:last-child {padding-bottom:0 !important;}
+.deliberate_confirm .listGroup01 li.listData p span {padding-right:12px;/*border:1px solid #ff0000;*/}
+.deliberate_confirm .listGroup01 li.listData p span:last-child {padding-right:0 !important;}
+
+.deliberate_confirm input.receiveData {font-weight:bold;color:#222;font-size:0.89em;border:1px solid #ddd;background:#fff;}
+.deliberate_confirm input.receiveData:focus {background:#fff;border:1px solid #ddd;}
+.deliberate_confirm input.tip {background:#f5f5f5 url(../images/oasis_sales/inputTip.gif) left top no-repeat;}
+
+
+/** 폐첨작업보고 **/
+.detach_report {padding:10px 0 12px 0;border-top:2px solid #3793d9;clear:both;border-bottom:1px solid #ccc;margin-bottom:10px;background:url(../images/common/bg_blueB.jpg) left top repeat;}
+.detach_report span {vertical-align:middle;}
+.detach_report span.firstSpan{padding-left:40px;}
+.detach_report span.endDate {margin-left:20px;}
+.detach_report span.endDate label {font-weight:bold;background:url(/images/common/bool_table_th.gif) left 50% no-repeat;padding-left:8px;}
+.detach_report select{vertical-align:middle;margin-right:5px;}
+.detach_report input[type=radio] {vertical-align:middle;}
+
+/* ADD SAYIDLEE 20120719 START */
+/** 연장신청 **/
+p.able_cost_ext {position:relative;top:4px;padding-left:22px;float:right;}
+p.able_cost_ext strong {color:#000;}
+/* ADD SAYIDLEE 20120719 E N D */
+
+/************************************* 2.계약정보 ***************************************************/
+
+/** 계약정보 **/
+.history_inTitle {padding:0 0 10px;}
+.history_inTitle .listTitle {margin-left:10px;font-weight:bold;}
+.history_inTitle .s_title {margin-left:10px;background:url(../images/common/bool_sec_stitle.gif) left 50% no-repeat ;padding-left:12px;font-size:0.9em;}
+
+/**매체현황조회**/
+.map_location {padding:0px; border:1px solid #ddd;height:auto;margin-bottom:7px;}
+span.map_circle {position:relative;top:7px;display:inline-block;width:25px;height:22px;background:url(../images/oasis_contract/bool_locate.png) no-repeat;background-position:left top;}
+span.map_triangle {position:relative;top:7px;display:inline-block;width:25px;height:22px;background:url(../images/oasis_contract/bool_locate.png) no-repeat;background-position:left -24px;}
+
+
+/** 광고주별 계약이력 조회 **/
+
+.ad_contract {position:relative;margin-bottom:;}
+.ad_contract h2 {display:inline-block;width:100px;color:#333;font-weight:bold;font-family:dotum;}
+.ad_contract span.opt {padding:0 !important;margin:0 !important;}
+.ad_contract span label {background:url(../images/common/bool_table_th.gif) left 50% no-repeat;padding-left:8px;margin-right:5px;font-weight:bold;color:#333;}
+.ad_contract span input[type=text] {padding:3px 1px !important;margin:0 !important;text-align:center !important;}
+.ad_contract select {margin:0 !important;}
+
+.ad_contract span.startDate {display:inline-block;margin-left:20px !important;}
+.ad_contract span.endDate,.ad_contract span.startDate {font-size:0.9em;letter-spacing:-1px;}
+.ad_contract span.singleDate {display:inline-block;margin-left:20px !important;}
+.btn_inlineRight {/*float:right;*/position:absolute;right:0;top:0px;margin-right:6px;}
+.btn_inlineRight:after {display:block;clear:both;content:'';}
+
+
+/****************************** 4.시설물 관리 ******************************************************/
+
+/** 장애보수관리 **/
+.repairBox {float:left;clear:both;display:block;width:100%;margin-top:10px;}
+.repairBox:after {display:block;clear:both;content:'';}
+.repairBlock1 {float:left;width:350px;}
+.repairBlock2 {float:right;width:390px;}
+.repairBlock3 {float:right;width:390px;margin-top:16px;}
+
+.mHistory label.title {padding-right:0;display:inline-block;background:url(../images/common/bool_ddData.gif) left 50% no-repeat;padding-left:8px;font-weight:bold;color:#444;}
+
+/***************************** 3.매출통계 *********************************************************/
+/** 광고료 고지 **/
+.adCharge_notice{position:relative;margin-bottom:;}
+.adCharge_notice h2 {display:inline-block;width:100px;color:#333;font-weight:bold;font-family:dotum;}
+.adCharge_notice span.opt {padding:0 !important;margin:0 !important;}
+.adCharge_notice span label {background:url(../images/common/bool_table_th.gif) left 50% no-repeat;padding-left:8px;margin-right:5px;font-weight:bold;color:#333;}
+.adCharge_notice span input[type=text] {padding:3px 1px !important;margin:0 !important;text-align:center !important;}
+.adCharge_notice select {margin:0 !important;}
+
+.adCharge_notice span.startDate {display:inline-block;margin-left:0px !important;}
+
+.chartBox {}
+
+/** 역사별 매출현황 **/
+.salesStatus {position:relative;margin-bottom:;}
+.salesStatus h2 {display:inline-block;width:100px;color:#333;font-weight:bold;font-family:dotum;}
+.salesStatus span.opt {padding:0 !important;margin:0 !important;}
+.salesStatus span label {background:url(../images/common/bool_table_th.gif) left 50% no-repeat;padding-left:8px;margin-right:5px;font-weight:bold;color:#333;}
+.salesStatus span input[type=text] {padding:3px 1px !important;margin:0 !important;text-align:center !important;}
+.salesStatus select {margin:0 !important;}
+
+.salesStatus span.startDate {display:inline-block;}
+.salesStatus span.singleDate {display:inline-block;margin-left:20px !important;}
+
+
+/** 광고물 심의현황 **/
+.deli_condition {padding-bottom:4px;border-bottom:1px dotted #ccc;position:relative;}
+.deli_condition input[type=radio] {vertical-align:middle;padding-left:6px;}
+.deli_condition span label {background:url(../images/common/bool_table_th.gif) left 50% no-repeat;padding-left:8px;margin-right:5px;font-weight:bold;color:#333;}
+.deli_condition span label.s_label {background:none;font-weight:normal;padding-left:4px;}
+
+/** 시설물관리 - 훼손및복구내역조회 **/
+.man_historyBlock {display:inline-block;width:100%;position:relative;}
+.man_historyBlock .leftBlock {float:left;margin-right:10px;width:64%;}
+.man_historyBlock .rightBlock {float:right;width:34%;}
+
+
+/** 기준정보 - 판매대행사 판매금액 관리 **/
+.base_selOption {padding:10px 0 12px 0;border-top:2px solid #3793d9;clear:both;border-bottom:1px solid #ccc;margin-bottom:10px;background:url(../images/common/bg_blueB.jpg) left top repeat;}
+.base_selOption span {vertical-align:middle;margin-right:14px;}
+.base_selOption select{vertical-align:middle;margin-right:5px;}
+.base_selOption input[type=radio] {vertical-align:middle;}
+
+
+.base_selOption span label {background:url(../images/common/bool_table_th.gif) left 50% no-repeat;padding-left:8px;margin-right:5px;font-weight:bold;color:#333;}
+
+.searchData {padding-bottom:10px;border-bottom:1px solid #eee;font-size:.95em;}
+.searchData_last {padding-top:10px;border-top:1px solid #eee;font-size:.95em;}
+
+.searchData span.firstSpan,.searchData_last span.firstSpan{margin-right:20px;}
+.searchData span label,.searchData_last span label {background:url(../images/common/bool_table_th.gif) left 50% no-repeat;padding-left:8px;margin-right:5px;font-weight:bold;color:#666;}
+.jq_content {padding:12px;}

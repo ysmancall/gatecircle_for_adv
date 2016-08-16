@@ -1,0 +1,181 @@
+<script>
+$('#cardgubun').change(function(){
+   $.ajax({
+    url : '/ajax_user_by_cardgubun/',
+    data : {cardgubun: $('#cardgubun').attr('value')},
+    success:function(data){
+        $('#user').html(data)
+    }
+   });
+});
+</script>
+<script>
+$('#ra').change(function(){
+   $.ajax({
+    url : '/ajax_circle/',
+    data : {ra: $(this).attr('value'), cardgubun: $('#cardgubun').attr('value'), user: $('#user').attr('value')},
+    success:function(data){
+        $('#circle_area').html(data)
+    }
+   });
+});
+</script>
+<script>
+$('#cardgubun').change(function(){
+   $.ajax({
+    url : '/ajax_circle/',
+    data : {ra: $('#ra').attr('value'), cardgubun: $(this).attr('value'), user: 'all'},
+    success:function(data){
+        $('#circle_area').html(data)
+    }
+   });
+});
+</script>
+<script>
+$('#user').change(function(){
+   $.ajax({
+    url : '/ajax_circle/',
+    data : {ra: $('#ra').attr('value'), cardgubun: $('#cardgubun').attr('value'), user: $(this).attr('value')},
+    success:function(data){
+        $('#circle_area').html(data)
+    }
+   });
+});
+</script>
+<div id="div{{ target }}" class="targetDiv" style="display:block;">
+    <p class="lineComment"><img src="static/images/media_info/{{ line_info }}" alt="" title="" /></p>
+    <h1 class="station3_name">{{ station_name }}</h1>
+    <!-- 승하차, 카드구분, 사용자 구분 -->
+    <div id="row" style="margin-bottom: 90px">
+        <div class="col-sm-4">
+            <select class="form-control" id="ra">
+                <option value="all">승하차(전체)</option>
+                <option value="R">승차</option>
+                <option value="A">하차</option>
+            </select>
+        </div>
+        <div class="col-sm-4">
+            <select class="form-control" id="cardgubun">
+                <option value="all">카드종류(전체)</option>
+                <option value="2">후불카드</option>
+                <option value="3">고급형선불카드</option>
+                <option value="4">신후불카드</option>
+                <option value="5">전자화폐</option>
+                <option value="B">정기권카드</option>
+                <option value="C">1회용교통카드</option>
+            </select>
+        </div>
+        <div class="col-sm-4">
+            <select class="form-control" id="user">
+                <option value="all">사용자(전체)</option>
+                <option value="1">일반</option>
+                <option value="2">초등생</option>
+                <option value="4">청소년</option>
+                <option value="6">경로</option>
+                <option value="7">장애인</option>
+                <option value="8">국가유공자</option>
+                <option value="11">직원</option>
+                <option value="12">어린이(1회권)</option>
+                <option value="21">경로(1회권)</option>
+                <option value="22">유공(1회권)</option>
+                <option value="23">장애(1회권)</option>
+                <option value="24">동반무임(1회권)</option>
+                <option value="41">영어 일반(1회권)</option>
+                <option value="42">일어 일반(1회권)</option>
+                <option value="43">중국어 일반(1회권)</option>
+                <option value="44">영어 어린이(1회권)</option>
+                <option value="45">일어 어린이(1회권)</option>
+                <option value="46">중국어 어린이(1회권)</option>
+            </select>
+        </div>
+    </div>
+    <div class="range_bar">
+        <h2>
+            <label class="lblFloat" for="nRadius" style="width:80px; margin-left:20px; margin-top:-5px;">
+                <span id="nRadius-value"></span>
+            </label>
+            <input type="range" min="4" max="25" id="nRadius" style="width:600px;">
+        </h2>
+    </div>
+    <div id="circle_area">
+        {% for loc in circle_locations %}
+            <div class="circle{{ loc.group }}" style="left: {{ loc.left }}px; top: {{ loc.top }}px; position: absolute; z-index: 2"></div>
+        {% endfor %}
+        <script type="text/javascript">
+            function numberWithCommas(x) {
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+            // update the circle radius
+            function update(nRadius) {
+
+                    var nRadius_text = '';
+
+                    if(nRadius == 4) {
+                        nRadius_text = "전체";
+                    } else if(nRadius == 25) {
+                        nRadius_text = "1시";
+                    } else {
+                        nRadius_text = nRadius + "시";
+                    }
+                // adjust the text on the range slider
+                d3.select("#nRadius-value").text(nRadius_text);
+                d3.select("#nRadius").property("value", nRadius);
+
+                var radius = {{ radius | safe }};
+                var count = {{ count | safe }};
+
+                // update the circle radius
+                {% for loc in circle_locations %}
+                    circle{{ loc.group }}.selectAll("circle").attr("r", radius['{{ loc.group }}'][nRadius]);
+                    circle{{ loc.group }}.selectAll("text").text(numberWithCommas(count['{{ loc.group }}'][nRadius]));
+                {% endfor %}
+
+                return nRadius;
+            }
+
+            var width = 300;
+            var height = 300;
+
+            {% for loc in circle_locations %}
+                var circle{{ loc.group }} = d3.selectAll(".circle{{ loc.group }}")
+                        .append("svg")
+                        .attr("width", width)
+                        .style("position", 0.3)
+                        .attr("height", height);
+
+                // Circle with no radius
+                circle{{ loc.group }}.append("circle")
+                        .attr("cx", 150)
+                        .attr("cy", 150)
+                        .style("fill", "blue")
+                        .style("fill-opacity", 0.3)
+                        .style("stroke", "none")
+                        .attr("r", 120);
+                circle{{ loc.group }}.append("text")
+                      .style("fill", "black")
+                      .style("font-size", "15px")
+                      .attr("dy", ".35em")
+                      .attr("text-anchor", "middle")
+                      .attr("transform", "translate(150,130) rotate(0)");
+
+            {% endfor %}
+
+            // Initial radius
+            update(4);
+
+            // when the input range changes update the circle
+            d3.select("#nRadius").on("input", function() {
+                update(+this.value);
+            });
+        </script>
+    </div>
+
+    <div style="position: absolute; z-index: 1;">
+        {% for pic in pic_list %}
+            <img src="static/images/media_info/{{ pic }}" alt="" title="" />
+        {% endfor %}
+        <img src="static/images/media_info/intro_remark.gif" alt="" title="" />
+    </div>
+
+</div>
+

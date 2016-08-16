@@ -1,0 +1,84 @@
+@charset "utf-8"; 
+
+/* Button Common */
+.button,
+.button *{ position:relative; margin:0; padding:0; display:-moz-inline-stack; display:inline-block; text-decoration:none !important; border:0;font-size:12px; font-family:dotum,Tahoma, Sans-serif; white-space:nowrap; background:url(../images/common/button_set.gif) no-repeat; vertical-align:top; overflow:visible; color:#333;}
+.button { margin-right:4px;}
+.button *{ left:4px; cursor:pointer; _cursor:hand;}
+
+/* Button Size = medium | large | xLarge | small */
+.button.medium-w, .button.medium-w *,.button.medium-b, .button.medium-b *{ height:24px; line-height:24px;}
+.button.small-g, .button.small-g *,.button.small-g2, .button.small-g2 *{ height:20px; line-height:20px;}
+
+.button.medium-w { background-position:left 0;}
+.button.medium-b { background-position:left -31px;}
+.button.small-g { background-position:left -91px;}
+.button.small-g2 { background-position:left -118px;}
+.button.medium-w *{ padding:0 6px 0 4px; font-size:12px; background-position:right top;}
+.button.medium-b *{ padding:0 6px 0 4px; font-size:12px; background-position:right -31px;color:#fff;}
+.button.small-g *{ padding:0 4px 0 2px; font-size:11px; background-position:right -91px;font-weight:normal !important;font-size:11px !important;}
+.button.small-g2 *{ padding:0 4px 0 2px; font-size:11px; background-position:right -118px;color:#eee;font-weight:normal !important;font-size:11px !important;}
+
+/* Button Hover */
+.button *:hover,.button *:active,.button *:focus{ color:#0c9edb;}
+.button.small-g2 *:hover,.button.small-g2 *:active,.button.small-g2 *:focus{ color:#fff;}
+.button.medium-b *:hover,.button.medium-b *:active,.button.medium-b *:focus{ color:#ffea00;}
+
+/* Button Strong */
+.button.strong *{ font-weight:bold !important;}
+
+/* Button Icon Variation */
+.button.icon *{ padding-left:13px;}
+.button.small-g.icon *{ padding-left:6px;}
+.button.small-g2.icon *{ padding-left:6px;}
+
+.button.icon span{ width:20px; margin-right:-13px; padding:0 !important;}
+
+.button.medium-w .check{ background-position:4px -150px;}
+.button.medium-w .search{ background-position:-10px -180px;}
+.button.medium-w .confirm{ background-position:-92px -180px;}
+.button.medium-w .cancel{ background-position:-50px -180px;}
+.button.medium-b .add{ background-position:-132px -180px;}
+.button.medium-w .add{ background-position:-134px -178px;}
+.button.medium-b .find_photo{ background-position:-642px -180px;}
+.button.medium-w .find_photo{ background-position:-642px -180px;}
+.button.medium-w .excel{ background-position:-714px -180px;}
+
+.button.medium-w .setting{ background-position:-368px -180px;}
+.button.medium-w .edit{ background-position:-328px -179px;}
+.button.medium-w .contract_confirm{ background-position:-452px -179px;}
+.button.medium-w .contract_cancel{ background-position:-406px -179px;}
+.button.medium-w .contract_move{ background-position:-486px -179px;}
+
+.button.medium-w .contract_write{ background-position:-563px -179px;}
+.button.medium-w .contract_delete{ background-position:-526px -179px;}
+.button.medium-w .contract_edit{ background-position:-597px -179px;}
+
+.button.small-g .edit{ background-position:-334px -181px;}
+.button.small-g .confirm{ background-position:-96px -180px;}
+.button.small-g .cancel{ background-position:-54px -180px;}
+.button.small-g2 .delete{ background-position:-297px -182px;}
+.button.small-g2 .find_photo{ background-position:-680px -183px;}
+.button.small-g .search{ background-position:-14px -180px;}
+
+
+.button.small .check{ background-position:3px -153px;}
+.button.medium .add{ background-position:-16px -150px;}
+
+.button.small .add{ background-position:-18px -153px;}
+.button.medium .delete{ background-position:-34px -150px;}
+
+.button.small .delete{ background-position:-37px -153px;}
+.button.medium .calendar{ background-position:-56px -150px;}
+
+.button.small .calendar{ background-position:-59px -153px;}
+.button.medium .refresh{ background-position:-76px -150px;}
+
+.button.small .refresh{ background-position:-79px -153px;}
+
+.Block_alignC {text-align:center;margin-top:20px;clear:both;}
+.Block_alignR {text-align:right;margin-top:20px;clear:both;}
+.rel_bottomR {position:relative;top:20px;text-align:right;display:block;}
+
+/* 20121024 ADD SayidLee 이미지 버튼 Disabled 처리 */
+.disabledInput {border:0;filter:alpha(opacity=50);opacity:0.4;cursor:default;}

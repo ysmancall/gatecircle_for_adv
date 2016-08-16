@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html ng-app="circle">
+<head>
+    <meta charset="UTF-8">
+    <title>상가 유동인원</title>
+    <script src="static/js/angular.js"></script>
+
+    <link rel="stylesheet" href="static/css/common.css" />
+    <link rel="stylesheet" href="static/css/style.css" />
+    <link rel="stylesheet" href="static/css/button.css" />
+    <link rel="stylesheet" href="static/css/ui.tabs.css" type="text/css" media="print, projection, screen">
+    <link rel="stylesheet" href="static/css/redmond/jquery-ui-1.8.16.custom.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="static/css/jqtransform.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="static/css/jqtree.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="static/css/ui.jqgrid.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="static/js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="static/js/jquery-ui-1.9.1.custom.min.js"></script>
+    <script type="text/javascript" src="static/js/jquery.maphilight.js"></script>
+    <script type="text/javascript" src="static/js/common.js"></script>
+    <script type="text/javascript" src="static/js/msPopup.js"></script>
+    <link rel="stylesheet" href="static/css/bootstrap.css">
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script>
+        angular.module("circle", []);
+    </script>
+    <script>
+        angular.module("circle").controller("circleCtrl", function ($scope) {
+            $scope.data = {
+                products: [
+                    {name: "Product #1", description: "A product", category: "Category #1", price: 100},
+                    {name: "Product #2", description: "A product", category: "Category #1", price: 110},
+                    {name: "Product #3", description: "A product", category: "Category #2", price: 210},
+                    {name: "Product #4", description: "A product", category: "Category #3", price: 202}
+                ]
+            };
+        });
+    </script>
+    <style>
+        .df{cursor:default}
+        .hand{cursor:hand;cursor:pointer;}
+    </style>
+    <script>
+        jQuery(function(){
+            jQuery('#showall').click(function(){
+                jQuery('.targetDiv').show();
+            });
+            jQuery('.showSingle').click(function(){
+                //jQuery('#div'+$(this).attr('target')).show();
+               $('#ajax').empty();
+               $.ajax({
+                url : '/station_info/',
+                data : {target: $(this).attr('target')},
+                success:function(data){
+                    $('#ajax').append(data)
+                }
+               });
+            });
+        });
+    </script>
+    <script>
+        function changeCursor(v){
+            document.body.className=v;
+        }
+    </script>
+    <script type="text/javascript">
+        $(function() {
+            $('.map').maphilight();
+
+            $("#subway_img1").css("display","none");
+            $("#subway_img2").css("display","block");
+            $("#subway_img3").css("display","none");
+            $("#subway_img4").css("display","none");
+        });
+    </script>
+    <script>
+        function changeLineBtn(line_no, showLine)
+        {
+            if(line_no == 1)
+            {
+                $("#subway_img1").css("display","block");
+                $("#subway_img2").css("display","none");
+                $("#subway_img3").css("display","none");
+                $("#subway_img4").css("display","none");
+            }
+            else if(line_no == 2)
+            {
+                $("#subway_img2").css("display","block");
+                $("#subway_img1").css("display","none");
+                $("#subway_img3").css("display","none");
+                $("#subway_img4").css("display","none");
+            }
+            else if(line_no ==3)
+            {
+                $("#subway_img3").css("display","block");
+                $("#subway_img1").css("display","none");
+                $("#subway_img2").css("display","none");
+                $("#subway_img4").css("display","none");
+            }
+            // 4호선 데이터 생겼을경우 주석을 풀어준다.
+            else if(line_no == 4)
+            {
+                $("#subway_img4").css("display","block");
+                $("#subway_img1").css("display","none");
+                $("#subway_img2").css("display","none");
+                $("#subway_img3").css("display","none");
+            }
+        }
+    </script>
+    <style type="text/css">
+        .range_bar {
+            display: table-cell;
+            vertical-align: middle;
+            height: 50px;
+        }
+        .lblFloat
+        {
+            float:left;
+        }
+    </style>
+</head>
+
+<body  ng-controller="circleCtrl">
+<!-- wrapper -->
+<div id="wrap">
+    <!-- 컨텐츠 영역 -->
+    <div class = "content_box" >
+        <p style="position:relative">
+          <img src="static/images/media_info/train_info_01.gif" alt="" title="" />
+          <button type="button" class="btn btn-default" style="position:absolute ; top:10px ;left:200px; line-height: 1.0" id = "line_1" name = "line1" onclick="changeLineBtn(1)">1호선</button>
+          <button type="button" class="btn btn-default" style="position:absolute ; top:10px ;left:270px; line-height: 1.0" id = "line_2" name = "line2" onclick="changeLineBtn(2)">2호선</button>
+          <button type="button" class="btn btn-default" style="position:absolute ; top:10px ;left:340px; line-height: 1.0" id = "line_3" name = "line3" onclick="changeLineBtn(3)">3호선</button>
+          <!--<button type="button" class="btn btn-default" style="position:absolute ; top:10px ;left:410px; line-height: 1.0" id = "line_4" name = "line4" onclick="changeLineBtn(4)">4호선</button>-->
+        </p>
+        <div id = "subway_img1" ><p><img src="static/images/media_info/subway_map.jpg" width="770" height="474" border="0" usemap="#subway1" class="map"/></p></div>
+        <div id = "subway_img2"><p><img src="static/images/media_info/subway_map.jpg" width="770" height="474" border="0" usemap="#subway2" class="map"/></p></div>
+        <div id = "subway_img3"><p><img src="static/images/media_info/subway_map.jpg" width="770" height="474" border="0" usemap="#subway3" class="map"/></p></div>
+        <div id = "subway_img4"><p><img src="static/images/media_info/subway_map.jpg" width="770" height="474" border="0" usemap="#subway4" class="map"/></p></div>
+
+        <div id="ajax"></div>
+    </div>
+    <!-- //컨텐츠 영역 -->
+
+	<div id="footer">
+		<span class="foot_logo"><a href=""><img src="static/images/common/bot_logo.gif" alt="Metro Adpia" title="Metro Adpia"/></a></span>
+		<span class="copyright"><img src="static/images/common/foot_copy.gif" alt="mediaset" /></span>
+	</div>
+
+</div>
+<!-- wrapper -->
+
+
+<map name="subway3" id="subway3">
+<area shape="circle" coords="728,404,7" alt="오금" target="334"  class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="703,404,7" alt="경찰병원" target="333"  class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="679,405,7" alt="가락시장" target="332"  class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="653,426,7" alt="수서" target="331"  class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="638,419,7" alt="일원" target="330"  class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="623,410,7" alt="대청" target="329"  class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="598,408,7" alt="학여울" target="328"  class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="571,409,7" alt="대치" target="327" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="552,409,7" alt="도곡" target="326" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="519,409,7" alt="매봉" target="325" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="488,409,7" alt="양재" target="324" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="458,402,7" alt="남부터미널" target="323" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="443,386,7" alt="교대" target="322" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="443,350,7" alt="고속터미널" target="321" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="449,305,7" alt="잠원" target="320" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="466,293,7" alt="신사" target="319" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="481,277,7" alt="압구정" target="318" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="487,256,7" alt="옥수" target="317" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="487,238,7" alt="금호" target="316" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="487,218,7" alt="약수" target="315" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="475,205,7" alt="동대입구" target="314" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+ <!--<area shape="circle" coords="457,190,7" alt="충무로" target="313" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />-->
+ <area shape="circle" coords="425,158,7" alt="을지로3가" target="312" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="424,134,7" alt="종로3가" target="311" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="415,110,7" alt="안국" target="310" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="404,100,7" alt="경봉궁" target="309" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="390,90,7" alt="독립문" target="308" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="360,90,7" alt="무악재" target="307" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="330,90,7" alt="홍제" target="306" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="307,90,7" alt="녹번" target="305" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="260,87,7" alt="불광" target="304" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="231,71,7" alt="연신내" target="303" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="190,71,7" alt="구파발" target="302" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="162,71,7" alt="지축" target="301" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6600","fillOpacity":0.7,"alwaysOn":true}'  />
+</map>
+<map name = "subway1" id = "subway1" >
+ <area shape="circle" coords="341,189,7" alt="서울역" target="11" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"1e3789","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="341,157,7" alt="시청역" target="12" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"1e3789","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="368,134,7" alt="종각역" target="13" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"1e3789","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="423,134,7" alt="종로3가역" target="14" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"1e3789","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="473,134,7" alt="종로5가역" target="15" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"1e3789","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="520,134,7" alt="동대문역" target="16" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"1e3789","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="618,134,7" alt="신설동역" target="17" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"1e3789","fillOpacity":0.7,"alwaysOn":true}' />
+ <area shape="circle" coords="648,134,7" alt="제기동역" target="18" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"1e3789","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="679,134,7" alt="청량리역" target="19" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"1e3789","fillOpacity":0.7,"alwaysOn":true}'  />
+ <!--<area shape="circle" coords="588,134,7" alt="동묘앞역" target="20" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"1e3789","fillOpacity":0.7,"alwaysOn":true}' />-->
+</map>
+<map name = "subway2" id = "subway2">
+ <!--<area shape="circle" coords="9,244,7" alt="까치산역" target="21" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />-->
+ <area shape="circle" coords="342,157,7" alt="시청역" target="21" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'   />
+ <area shape="circle" coords="390,157,7" alt="을지로입구역" target="22" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'   />
+ <area shape="circle" coords="425,157,7" alt="을지로3가역" target="23" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="486,157,7" alt="을지로4가역" target="24" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="519,157,7" alt="동대문역사문화공원역" target="25" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="588,157,7" alt="신당역" target="26" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="605,175,7" alt="상왕십리역" target="27" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="621,188,7" alt="왕십리역" target="28" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="641,212,7" alt="한양대역" target="29" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="654,224,7" alt="뚝섬역" target="210" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="663,232,7" alt="성수역" target="211" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="664,249,7" alt="건대입구역" target="212" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="664,282,7" alt="구의역" target="213" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="664,302,7" alt="강변역" target="214" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="664,320,7" alt="잠실나루역" target="215" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="664,339,7" alt="잠실역" target="216" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="664,358,7" alt="신천역" target="217" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="664,385,7" alt="종합운동장역" target="218" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="598,385,7" alt="삼성역" target="219" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="553,385,7" alt="선릉역" target="220" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="528,385,7" alt="역삼역" target="221" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="490,385,7" alt="강남역" target="222" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="443,385,7" alt="교대역" target="223" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="421,385,7" alt="서초역" target="224" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="397,388,7" alt="방배역" target="225" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="343,385,7" alt="사당역" target="226" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="323,385,7" alt="낙성대역" target="227" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="280,385,7" alt="서울대입구역" target="228" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="241,385,7" alt="봉천역" target="229" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="215,385,7" alt="신림역" target="230" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="178,364,7" alt="신대방역" target="231" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="163,350,7" alt="구로디지털단지역" target="232" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="138,324,7" alt="대림역" target="233" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="121,310,7" alt="신도림역" target="234" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="122,283,7" alt="문래역" target="235" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="122,257,7" alt="영등포구청역" target="236" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="122,227,7" alt="당산역" target="237" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="137,188,7" alt="합정역" target="238" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="182,167,7" alt="홍대입구역" target="239" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="215,157,7" alt="신촌역" target="240" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="242,157,7" alt="이대역" target="241" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="268,157,7" alt="아현역" target="242" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="289,157,7" alt="충정로역" target="243" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="666,216,7" alt="용답역" target="244" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="652,168,7" alt="신답역" target="245" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="616,132,7" alt="신설동역" target="246" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="94,311,7" alt="도림천역" target="247" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="30,282,7" alt="양천구청역" target="248" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="22,263,7" alt="신정네거리역" target="249" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+ <area shape="circle" coords="630,148,7" alt="용두역" target="250" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":false,"fillColor":"21b932","fillOpacity":0.7,"alwaysOn":true}'  />
+</map>
+<map name = "subway4" id = "subway4">
+<area shape="circle" coords="761,23,7" alt="당고개역" target="41" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="751,47,7" alt="상계역" target="42" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="725,47,7" alt="노원역" target="43" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="697,63,7" alt="창동역" target="44" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="677,65,7" alt="쌍문역" target="45" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="653,65,7" alt="수유역" target="46" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="631,65,7" alt="미아역" target="47" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="593,65,7" alt="미아삼거리역" target="48" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="558,65,7" alt="길음역" target="49" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="541,75,7" alt="성신여대역" target="410" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="535,93,7" alt="한성대입구역" target="411" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="528,109,7" alt="혜화역" target="412" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="520,132,7" alt="동대문역" target="413" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="520,157,7" alt="동대문역사문화공원역" target="414" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="456,188,7" alt="충무로역" target="415" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="438,191,7" alt="명동역" target="416" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="402,191,7" alt="회현역" target="417" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="343,191,7" alt="서울역" target="418" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="346,216,7" alt="숙대입구역" target="419" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="346,235,7" alt="삼각지역" target="420" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="346,260,7" alt="신용산역" target="421" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="346,281,7" alt="이촌역" target="422" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="346,329,7" alt="동작역" target="423" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="346,347,7" alt="이수역" target="424" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="343,385,7" alt="사당역" target="425" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+<area shape="circle" coords="332,401,7" alt="남태령역" target="426" class="showSingle" onmouseover=changeCursor("hand") onmouseout=changeCursor("df")  data-maphilight='{"stroke":true,"fillColor":"FF6660","fillOpacity":0.7,"alwaysOn":true}'  />
+</map>
+</body>
+</html>

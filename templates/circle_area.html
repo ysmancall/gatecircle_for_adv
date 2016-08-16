@@ -1,0 +1,70 @@
+{% for loc in circle_locations %}
+    <div class="circle{{ loc.group }}" style="left: {{ loc.left }}px; top: {{ loc.top }}px; position: absolute; z-index: 2"></div>
+{% endfor %}
+<script type="text/javascript">
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    // update the circle radius
+    function update(nRadius) {
+
+            var nRadius_text = '';
+
+            if(nRadius == 4) {
+                nRadius_text = "전체";
+            } else if(nRadius == 25) {
+                nRadius_text = "1시";
+            } else {
+                nRadius_text = nRadius + "시";
+            }
+        // adjust the text on the range slider
+        d3.select("#nRadius-value").text(nRadius_text);
+        d3.select("#nRadius").property("value", nRadius);
+
+        var radius = {{ radius | safe }};
+        var count = {{ count | safe }};
+
+        // update the circle radius
+        {% for loc in circle_locations %}
+            circle{{ loc.group }}.selectAll("circle").attr("r", radius['{{ loc.group }}'][nRadius]);
+            circle{{ loc.group }}.selectAll("text").text(numberWithCommas(count['{{ loc.group }}'][nRadius]));
+        {% endfor %}
+
+        return nRadius;
+    }
+
+    var width = 300;
+    var height = 300;
+
+    {% for loc in circle_locations %}
+        var circle{{ loc.group }} = d3.selectAll(".circle{{ loc.group }}")
+                .append("svg")
+                .attr("width", width)
+                .style("position", 0.3)
+                .attr("height", height);
+
+        // Circle with no radius
+        circle{{ loc.group }}.append("circle")
+                .attr("cx", 150)
+                .attr("cy", 150)
+                .style("fill", "blue")
+                .style("fill-opacity", 0.3)
+                .style("stroke", "none")
+                .attr("r", 120);
+        circle{{ loc.group }}.append("text")
+              .style("fill", "black")
+              .style("font-size", "15px")
+              .attr("dy", ".35em")
+              .attr("text-anchor", "middle")
+              .attr("transform", "translate(150,130) rotate(0)");
+
+    {% endfor %}
+
+    // Initial radius
+    update(4);
+
+    // when the input range changes update the circle
+    d3.select("#nRadius").on("input", function() {
+        update(+this.value);
+    });
+</script>
